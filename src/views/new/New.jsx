@@ -5,15 +5,27 @@ import "react-quill/dist/quill.snow.css";
 import "./styles.css";
 const NewBlogPost = (props) => {
   const [text, setText] = useState("");
-  const handleChange = useCallback((value) => {
+  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState("");
+
+  const handleQuillChange = useCallback((value) => {
     setText(value);
+    console.log(text);
+  });
+  const handleTitleChange = useCallback((value) => {
+    setTitle(value);
+    console.log(title);
   });
   return (
     <Container className="new-blog-container">
       <Form className="mt-5">
         <Form.Group controlId="blog-form" className="mt-3">
           <Form.Label>Title</Form.Label>
-          <Form.Control size="lg" placeholder="Title" />
+          <Form.Control
+            size="lg"
+            placeholder="Title"
+            onChange={handleTitleChange}
+          />
         </Form.Group>
         <Form.Group controlId="blog-category" className="mt-3">
           <Form.Label>Category</Form.Label>
@@ -29,7 +41,7 @@ const NewBlogPost = (props) => {
           <Form.Label>Blog Content</Form.Label>
           <ReactQuill
             value={text}
-            onChange={handleChange}
+            onChange={handleQuillChange}
             className="new-blog-content"
           />
         </Form.Group>
